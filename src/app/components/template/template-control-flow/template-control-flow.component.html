@@ -1,0 +1,134 @@
+<h2 style="text-decoration: underline;">Control Flow</h2>
+
+<h3>IF</h3>
+<!-- Control Flow - Angular v17+ [Forma Nova] -->
+@if (isTrue) {
+    <p>Control Flow - True</p>
+}@else if (1===1){
+    <p>Control Flow - Else If</p>
+}@else{
+    <p>Control Flow - False</p>
+}
+
+<!-- Diretiva - Angular v16- [Forma  Antiga] -->
+<ng-container *ngIf="isTrue; else isFalse">
+    <p>Diretiva - True</p>
+</ng-container>
+<ng-template #isFalse>
+    <p>Diretiva - False</p>
+</ng-template>
+
+<hr />
+<h3>For</h3>
+<!-- Control Flow - Angular v17+ [Forma Nova] -->
+@if(loadingData$ | async; as data){
+    <ul>
+        @for(item of data; track item){
+            <li>{{item}} - If/For Control Flow</li>
+        }
+    </ul>
+} @else {
+    <p>Carregando... - IF/Else Control Flow</p>
+}
+
+<ul>
+@for(item of loadingData$ | async; track item){
+    <li>{{item}} - For Control Flow</li>
+}
+</ul>
+
+<!-- Diretiva - Angular v16- [Forma  Antiga] -->
+ <ng-container *ngIf="loadingData$ | async as data; else loading">
+    <ul>
+        <li *ngFor="let item of data; trackBy: trackByFn">{{item}} - Diretiva</li>
+    </ul>
+</ng-container>
+<ng-template #loading>
+    <p>Carregando... - Diretiva</p>
+</ng-template>
+
+<!-- Control Flow - Angular v17+ [Forma Nova] -->
+@for(
+    item of itens; track item.name;
+    let i = $index;
+    let c = $count;
+    let f = $first;
+    let l = $last;
+    let e = $even;
+    let o = $odd;
+) {
+    <p>{{item.name}} - Control Flow</p>
+    <p>index - {{i}}</p>
+    <p>count - {{c}}</p>
+    <p>first - {{f}}</p>
+    <p>last - {{l}}</p>
+    <p>even - {{e}}</p>
+    <p>odd - {{o}}</p>
+}
+
+<!-- Diretiva - Angular v16- [Forma  Antiga] -->
+<ng-container 
+    *ngFor="
+        let item of itens; 
+        let i = index; 
+        let c = count; 
+        let f = first; 
+        let l = last; 
+        let e = even; 
+        let o = odd; 
+        trackBy: trackByFn">
+
+    <p>{{item.name}} - Diretiva</p>
+    <p>index - {{i}}</p>
+    <p>count - {{c}}</p>
+    <p>first - {{f}}</p>
+    <p>last - {{l}}</p>
+    <p>even - {{e}}</p>
+    <p>odd - {{o}}</p>
+</ng-container>
+
+<input #name type="text">
+<button (click)="addNewName(name.value)">Add Name</button>
+
+<!-- Control Flow - Angular v17+ [Forma Nova] -->
+ <ul>
+    @for(item of itens; track item.name){
+        <li>{{item. name}} - Control Flow</li>
+    }@empty{
+        <li>Nenhum item encontrado - Control Flow</li>
+    }
+ </ul>
+
+ <!-- Diretiva - Angular v16- [Forma  Antiga] -->
+  <ng-container *ngIf="itens.length > 0; else empty">
+    <ul>
+        <li *ngFor="let item of itens; trackBy: trackByFn">{{item.name}} - Diretiva</li>
+    </ul>
+</ng-container>
+<ng-template #empty>
+    <p>Nenhum item encontrado - Diretiva</p>
+</ng-template>
+
+<hr />
+<h3>Switch Case</h3>
+
+<!-- Control Flow - Angular v17+ [Forma Nova] -->
+@switch(switchCondition){
+    @case('A'){
+        <p>Case A - Control Flow</p>
+    }
+    @case('B'){
+        <p>Case B - Control Flow</p>
+    }
+    @default{
+        <p>Default - Control Flow</p>
+    }
+ }
+
+<!-- Diretiva - Angular v16- [Forma  Antiga] -->
+
+<ng-container [ngSwitch]="switchCondition">
+    <p *ngSwitchCase="'A'">Case A - Diretiva</p>
+    <p *ngSwitchCase="'B'">Case B - Diretiva</p>
+    <p *ngSwitchDefault>Default - Diretiva</p>
+</ng-container>

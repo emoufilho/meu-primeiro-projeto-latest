@@ -1,0 +1,33 @@
+
+<h2 #tigger style="text-decoration: underline;">Deferrable Views</h2>
+
+<!--
+on: especifica uma condição de acionar usando um acionador da lista
+    idle: carregamento padrão
+    timer: carregamento após um tempo. Ex: @defer (on timer(5000ms)){
+    viewport: carregamento após o elemento ser visível na tela
+    interaction: carregamento após interação do usuário
+    hover: carregamento após passar o mouse
+    immediate: carregamento imediato, não espera acabar as outras condições do brownser
+    prefetch: carregamento em segundo plano
+   
+when: especifica uma condição imperativa como uma expressão que retorna um booleano. 
+Quando a espressão se torna verdadeira, o espaço reservado é trocado pelo conteúdo 
+carregado lentamente (o que ser uma operação assíncrona se as dependências 
+precisarem ser buscadas)
+
+Nota: Vários on triggers são sempre condições OR. Da mesma forma, on misturado com when 
+também são condições OR. Se você deseja condições AND, você deve usar várias diretivas.
+-->
+
+<button (click)="isTrue = !isTrue">Toggle</button>
+
+@defer{
+    <app-new-component />
+}@placeholder{
+    <p>Placeholder...</p>
+}@loading{
+    <p>Loading...</p>
+}@error{
+    <p>Error...</p>
+}
